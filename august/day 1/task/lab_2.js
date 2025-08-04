@@ -5,8 +5,8 @@ var manipulateArr = {
       throw new Error("This value already exists");
     }
 
-    if (this.isEmpty() || this.data[this.data.length - 1] < val) {
-      this.data.push(val);
+    if (this.isEmpty() || this.data[this.data.length - 1].val < val) {
+      this.data.push({ val });
     } else {
       throw new Error("Entered Value is smaller than the last entered element");
     }
@@ -19,8 +19,8 @@ var manipulateArr = {
       throw new Error("This value already exists");
     }
 
-    if (this.isEmpty() || this.data[0] > val) {
-      this.data.unshift(val);
+    if (this.isEmpty() || this.data[0].val > val) {
+      this.data.unshift({ val });
     } else {
       throw new Error("Entered Value is larger than the first element");
     }
@@ -30,7 +30,7 @@ var manipulateArr = {
   },
   display: function () {
     for (var ele of this.data) {
-      console.log(ele);
+      console.log(ele.val);
     }
   },
   insertVal: function (index, val) {
@@ -46,31 +46,32 @@ var manipulateArr = {
     if (index == this.data.length) {
       return this.pushVal(val);
     }
-    if (this.data[index] > val && this.data[index - 1] < val) {
-      return this.data.splice(index, 0, val);
+    if (this.data[index].val > val && this.data[index - 1].val < val) {
+      return this.data.splice(index, 0, { val });
     }
-    if (this.data[index] < val) {
+    if (this.data[index].val < val) {
       throw new Error(
-        "Entered Value is larger than the element after it: " + this.data[index]
+        "Entered Value is larger than the element after it: " +
+          this.data[index].val
       );
     }
-    if (this.data[index - 1] > val) {
+    if (this.data[index - 1].val > val) {
       throw new Error(
         "Entered Value is smaller than the element before it: " +
-          this.data[index - 1]
+          this.data[index - 1].val
       );
     }
   },
   removeVal: function (val) {
     if (this.hasValue(val)) {
-      var indexOfVal = this.data.indexOf(val);
-      this.data.splice(indexOfVal, 1);
+      var index = this.data.findIndex((obj) => obj.val === val);
+      this.data.splice(index, 1);
     } else {
       throw new Error("Data not found");
     }
   },
   hasValue: function (val) {
-    return this.data.includes(val);
+    return this.data.some((obj) => obj.val == val);
   },
   isEmpty: function () {
     return this.data.length == 0;
@@ -78,5 +79,5 @@ var manipulateArr = {
 };
 
 manipulateArr.pushVal(5);
-manipulateArr.pushVal(3);
+manipulateArr.removeVal(5);
 manipulateArr.display();
