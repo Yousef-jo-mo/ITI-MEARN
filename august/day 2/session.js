@@ -5,10 +5,13 @@ function Employee(firstName, lastName, age) {
 }
 
 Employee.prototype.info = function () {
-  setTimeout(function () {
-    alert("Hello ya: " + this.firstName);
-  }, 2000);
+  setTimeout(
+    function () {
+      alert("Hello ya: " + this.firstName);
+    }.bind(this),
+    2000
+  );
 };
 
 var emp1 = new Employee("Yousef", "Mohamed", 24);
-emp1.info.bind(emp1)();
+emp1.info();

@@ -79,5 +79,12 @@ var manipulateArr = {
 };
 
 manipulateArr.pushVal(5);
+manipulateArr.enqueueVal(2);
+manipulateArr.enqueueVal(1);
 manipulateArr.removeVal(5);
+manipulateArr.pushVal(7);
+manipulateArr.pushVal(9);
+manipulateArr.popVal();
+manipulateArr.dequeueVal();
+manipulateArr.insertVal(1, 5);
 manipulateArr.display();
