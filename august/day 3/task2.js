@@ -3,15 +3,9 @@ function Vehicle(speed, color) {
   this.color = color;
 }
 
-Vehicle.prototype.turnLeft = function () {
-  console.log("Turn Left");
-};
-Vehicle.prototype.turnRight = function () {
-  console.log("Turn Right");
-};
-Vehicle.prototype.goBackward = function (accel) {
-  return "speed= " + this.speed + " accel= " + accel;
-};
+Vehicle.prototype.turnLeft = function () {};
+Vehicle.prototype.turnRight = function () {};
+Vehicle.prototype.goBackward = function (accel) {};
 Vehicle.prototype.goForward = function (accel) {};
 Vehicle.prototype.start = function () {
   return true;
