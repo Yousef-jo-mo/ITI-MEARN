@@ -1,40 +1,45 @@
 function Vehicle(speed, color) {
   this.speed = speed;
   this.color = color;
-  this.turnLeft = function () {
-    console.log("Turn Left");
-  };
-  this.turnRight = function () {
-    console.log("Turn Right");
-  };
-  this.goBackward = function (speed, accel) {};
-  this.goForward = function (speed, accel) {};
-  this.start = function () {
-    return true;
-  };
-
-  this.stop = function () {
-    return false;
-  };
 }
+
+Vehicle.prototype.turnLeft = function () {
+  console.log("Turn Left");
+};
+Vehicle.prototype.turnRight = function () {
+  console.log("Turn Right");
+};
+Vehicle.prototype.goBackward = function (accel) {
+  return "speed= " + this.speed + " accel= " + accel;
+};
+Vehicle.prototype.goForward = function (accel) {};
+Vehicle.prototype.start = function () {
+  return true;
+};
+
+Vehicle.prototype.stop = function () {
+  return false;
+};
 
 function Bicycle(speed, color) {
   Vehicle.call(this, speed, color);
-  this.ringBell = function () {};
 }
+Bicycle.prototype.ringBell = function () {};
 Bicycle.prototype = Object.create(Vehicle.prototype);
 Bicycle.prototype.constructor = Bicycle;
 
 function MotorVehicle(speed, color, sizeOfEngine, licensePlate) {
   Vehicle.call(this, speed, color);
-  this.getSizeOfEngine = function () {
-    return sizeOfEngine;
-  };
-  this.getLicensePlate = function () {
-    return licensePlate;
-  };
+  this.sizeOfEngine = sizeOfEngine;
+  this.licensePlate = licensePlate;
 }
-MotorVehicle.prototype = Object.create(Vehicle);
+MotorVehicle.prototype.getSizeOfEngine = function () {
+  return this.sizeOfEngine;
+};
+MotorVehicle.prototype.getLicensePlate = function () {
+  return this.licensePlate;
+};
+MotorVehicle.prototype = Object.create(Vehicle.prototype);
 MotorVehicle.prototype.constructor = MotorVehicle;
 
 function DumpTruck(
@@ -47,10 +52,13 @@ function DumpTruck(
   weight
 ) {
   MotorVehicle.call(this, speed, color, sizeOfEngine, licensePlate);
-  this.lowerLoad = function () {};
-  this.raiseLoad = function () {};
+  this.loadCapacity = loadCapacity;
+  this.numWheels = numWheels;
+  this.weight = weight;
 }
-DumpTruck.prototype = Object.create(MotorVehicle);
+DumpTruck.prototype.lowerLoad = function () {};
+DumpTruck.prototype.raiseLoad = function () {};
+DumpTruck.prototype = Object.create(MotorVehicle.prototype);
 DumpTruck.prototype.constructor = DumpTruck;
 
 function Car(
@@ -60,11 +68,19 @@ function Car(
   licensePlate,
   numOfDoors,
   numWheels,
-  Weight
+  weight
 ) {
   MotorVehicle.call(this, speed, color, sizeOfEngine, licensePlate);
-  this.switchOnAirCon = function () {};
-  this.getNumOfDorrs = function () {
-    return numOfDoors;
-  };
+  this.numOfDoors = numOfDoors;
+  this.numWheels = numWheels;
+  this.weight = weight;
 }
+MotorVehicle.prototype.switchOnAirCon = function () {};
+MotorVehicle.prototype.getNumOfDoors = function () {
+  return numOfDoors;
+};
+Car.prototype = Object.create(MotorVehicle.prototype);
+Car.prototype.constructor = Car;
+
+var bicycle1 = new Bicycle(300, "red");
+console.log(bicycle1.goBackward(20));

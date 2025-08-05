@@ -53,9 +53,7 @@ Rectangle.prototype.constructor = Rectangle;
 
 Rectangle.count = 0;
 Rectangle.prototype.valueOf = function () {
-  if (Rectangle.count > 0) {
-    return this.area;
-  }
+  return this.area;
 };
 
 function Square(side) {
