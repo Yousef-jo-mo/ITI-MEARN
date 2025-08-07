@@ -72,3 +72,7 @@ console.log(rect2.area);
 console.log(rect1 + rect2);
 console.log(rect1 - rect2);
 console.log(rect1.toString());
+
+var square1 = new Square(10);
+console.log("square area: " + square1.area);
+console.log(square1.toString());
