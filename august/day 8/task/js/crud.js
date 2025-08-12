@@ -7,8 +7,8 @@ $(document).ready(function () {
 });
 
 function addToTable() {
-  var personName = $("#name").val();
-  var personAge = $("#age").val();
+  var personName = $("#name").val().trim();
+  var personAge = $("#age").val().trim();
   var person = {
     id: id,
     name: personName,
@@ -31,7 +31,7 @@ function deleteFromTable(id) {
 function searchForPersons() {
   var searchStr = $("#search-item").val().toLowerCase();
   var foundedpersons = personsData.filter((item) =>
-    item.name.toLowerCase().includes(searchStr)
+    item.name.toLowerCase().includes(searchStr.trim())
   );
   $("#persons-list tbody").empty();
   for (var person of foundedpersons) {
