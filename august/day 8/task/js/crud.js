@@ -9,15 +9,6 @@ $(document).ready(function () {
 function addToTable() {
   var personName = $("#name").val().trim();
   var personAge = $("#age").val().trim();
-  showEmptyError("#name", "Please enter your name", personName);
-  showEmptyError("#age", "Please enter your age", personAge);
-  showInvalidInputError("#age", "Please enter valid age", personAge);
-  if (personName !== "" && personAge !== "" && isNumber(personAge)) {
-    $("p.error").remove();
-  }
-  if ($("p.error").length > 0) {
-    return;
-  }
   var person = {
     id: id,
     name: personName,
@@ -56,20 +47,4 @@ function personDataRow(person) {
     <button onClick="deleteFromTable('${person.id}')">Delete</button>
   </td>
   </tr>`;
-}
-
-function showEmptyError(selector, message, value) {
-  if (value === "" && $(selector).next("p.error").length === 0) {
-    $(selector).after("<p class='error'>" + message + "</p>");
-  }
-}
-
-function showInvalidInputError(selector, message, value) {
-  if (!isNumber(value) && $(selector).next("p.error").length === 0) {
-    $(selector).after("<p class='error'>" + message + "</p>");
-  }
-}
-
-function isNumber(value) {
-  return !isNaN(value);
 }
